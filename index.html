@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nguyễn Văn A | UX/UI Designer & Senior Front-end Developer</title>
+  
+  <meta name="description" content="Portfolio của Nguyễn Văn A - Chuyên gia UX/UI Design và Senior Front-end Developer. Chuyên thiết kế giao diện hiện đại và phát triển ứng dụng Web chuẩn Semantic & Accessibility.">
+  
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Cấu hình Tailwind Custom Theme -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              dark: '#0f172a', /* Nền xám đen chì (slate-900) */
+              card: '#1e293b', /* Nền Card (slate-800) */
+            }
+          },
+          animation: {
+            'blob': 'blob 7s infinite',
+          },
+          keyframes: {
+            blob: {
+              '0%': { transform: 'translate(0px, 0px) scale(1)' },
+              '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+              '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+              '100%': { transform: 'translate(0px, 0px) scale(1)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom CSS cho các hiệu ứng nâng cao (Glassmorphism, Gradient) -->
+  <style>
+    body {
+      background-color: #0f172a;
+      color: #cbd5e1; /* text-slate-300 */
+    }
+
+    /* Skip link phục vụ A11y (Screen Reader / Bàn phím) */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 1rem;
+      background: linear-gradient(to right, #22d3ee, #8b5cf6);
+      color: #fff;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      z-index: 9999;
+      font-weight: bold;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 1rem;
+      outline: 4px solid #fff;
+    }
+
+    /* Glassmorphism Classes */
+    .glass {
+      background: rgba(30, 41, 59, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .glass-card {
+      background: rgba(30, 41, 59, 0.4);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Text Gradient */
+    .text-gradient {
+      background: linear-gradient(135deg, #22d3ee 0%, #8b5cf6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Focus Ring Customization cho A11y */
+    *:focus-visible {
+      outline: 2px solid #22d3ee;
+      outline-offset: 4px;
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-cyan-500/30 selection:text-cyan-200">
+
+  <!-- 
+    Thẻ <a> (Skip Link): Đóng vai trò cực kỳ quan trọng trong A11y. 
+    Người dùng công nghệ trợ năng hoặc phím Tab có thể bỏ qua toàn bộ menu 
+    để nhảy thẳng vào thẻ <main>, tiết kiệm thời gian điều hướng.
+  -->
+  <a href="#main-content" class="skip-link">Chuyển đến nội dung chính</a>
+
+  <!-- Trang trí Background Blob Gradients mờ -->
+  <div class="fixed inset-0 w-full h-full pointer-events-none z-[-1] overflow-hidden">
+    <div class="absolute top-0 -left-4 w-72 h-72 bg-violet-500 rounded-full mix-blend-multiply filter blur-[128px] opacity-20 animate-blob"></div>
+    <div class="absolute top-0 -right-4 w-72 h-72 bg-cyan-500 rounded-full mix-blend-multiply filter blur-[128px] opacity-20 animate-blob animation-delay-2000"></div>
+    <div class="absolute -bottom-8 left-20 w-72 h-72 bg-fuchsia-500 rounded-full mix-blend-multiply filter blur-[128px] opacity-20 animate-blob animation-delay-4000"></div>
+  </div>
+
+  <!-- 
+    Thẻ <header> kèm thuộc tính role="banner":
+    Định nghĩa khu vực tiêu đề toàn cục của trang web. Glassmorphism được áp dụng
+    để tạo chiều sâu không gian (z-index cao, fixed top).
+  -->
+  <header role="banner" class="fixed w-full top-0 z-50 glass transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <div class="flex-shrink-0">
+        <a href="#hero" aria-label="Tải lại trang chủ" class="text-2xl font-bold tracking-tighter text-white">
+          <span class="text-gradient">Nova</span>Studio.
+        </a>
+      </div>
+
+      <!-- 
+        Thẻ <nav>: Định danh khu vực chứa các liên kết điều hướng chính.
+        Sử dụng aria-label="Main Navigation" để Screen Reader phân tách với các menu khác.
+      -->
+      <nav aria-label="Main Navigation" class="hidden md:block">
+        <ul class="flex space-x-8 items-center text-sm font-medium">
+          <li><a href="#hero" class="text-slate-300 hover:text-cyan-400 transition-colors">Trang chủ</a></li>
+          <li><a href="#about" class="text-slate-300 hover:text-cyan-400 transition-colors">Giới thiệu & Kỹ năng</a></li>
+          <li><a href="#projects" class="text-slate-300 hover:text-cyan-400 transition-colors">Dự án</a></li>
+          <li>
+            <!-- Call to Action Button trong Menu -->
+            <a href="#contact" class="px-5 py-2.5 rounded-full bg-gradient-to-r from-cyan-500 to-violet-500 text-white hover:from-cyan-400 hover:to-violet-400 transition-all shadow-lg shadow-cyan-500/25">
+              Liên hệ ngay
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Mobile Menu Button (Hamburger) - Được thiết lập aria-expanded phục vụ A11y -->
+      <div class="md:hidden">
+        <button type="button" class="text-slate-300 hover:text-white p-2" aria-controls="mobile-menu" aria-expanded="false" aria-label="Mở menu điều hướng">
+          <i class="fa-solid fa-bars text-xl" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 
+    Thẻ <main>: Định nghĩa nội dung cốt lõi của tài liệu. 
+    Thuộc tính role="main" đôi khi thừa trong HTML5 nhưng vẫn được khuyên dùng để tương thích ngược tối đa với các Screen Reader cũ.
+  -->
+  <main id="main-content" role="main" class="pt-20">
+
+    <!-- ==============================================
+         SECTION 1: HERO
+         Thẻ <section> có aria-labelledby liên kết tới tiêu đề <h1> để cung cấp ngữ cảnh rõ ràng.
+    =============================================== -->
+    <section id="hero" aria-labelledby="hero-heading" class="min-h-[90vh] flex items-center relative overflow-hidden">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8 py-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        
+        <!-- Nội dung Text -->
+        <div class="space-y-8 z-10">
+          <p class="text-cyan-400 font-semibold tracking-wide uppercase text-sm" aria-hidden="true">👋 Xin chào, tôi là</p>
+          
+          <!-- Thẻ <h1>: Điểm nhấn SEO mạnh nhất trang. Chỉ có 1 thẻ H1 duy nhất mô tả trọng tâm. -->
+          <h1 id="hero-heading" class="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-tight">
+            Nguyễn Văn <br>
+            <span class="text-gradient">A.</span>
+          </h1>
+          
+          <p class="text-lg text-slate-400 max-w-lg leading-relaxed">
+            Chuyên gia <strong>UX/UI Design</strong> và <strong>Senior Front-end Developer</strong>. Tôi biến các ý tưởng phức tạp thành những trải nghiệm web hiện đại, mượt mà và dễ dàng tiếp cận cho mọi người.
+          </p>
+          
+          <div class="flex flex-wrap gap-4 pt-2">
+            <a href="#projects" class="px-8 py-4 rounded-full bg-slate-100 text-slate-900 font-bold hover:bg-white transition-colors shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+              Khám phá Dự án
+            </a>
+            <a href="#contact" class="px-8 py-4 rounded-full glass font-bold text-white hover:bg-slate-800/80 border border-slate-700 transition-colors flex items-center gap-2">
+              <i class="fa-solid fa-download" aria-hidden="true"></i> Tải CV
+            </a>
+          </div>
+        </div>
+
+        <!-- Ảnh Avatar / Visual -->
+        <div class="relative z-10 hidden lg:flex justify-end">
+          <div class="relative w-80 h-80 xl:w-96 xl:h-96">
+            <!-- Vòng sáng mờ phía sau ảnh -->
+            <div class="absolute inset-0 bg-gradient-to-tr from-cyan-500 to-violet-500 rounded-full blur-2xl opacity-40 animate-pulse"></div>
+            <!-- Ảnh đại diện -->
+            <!-- Thuộc tính alt="" nếu là ảnh trang trí thuần túy, nhưng đây là avatar cá nhân nên cần mô tả ngắn gọn -->
+            <img 
+              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600&h=600&auto=format&fit=crop" 
+              alt="Chân dung Nguyễn Văn A" 
+              class="relative rounded-full w-full h-full object-cover border-4 border-slate-800 shadow-2xl z-10"
+              fetchpriority="high"
+            >
+            <!-- Badge nổi -->
+            <div class="absolute -bottom-6 -left-6 glass-card px-6 py-4 rounded-2xl z-20 flex items-center gap-4">
+              <div class="text-4xl">🚀</div>
+              <div>
+                <p class="text-2xl font-bold text-white">5+</p>
+                <p class="text-xs text-slate-400 uppercase font-semibold">Năm kinh nghiệm</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================
+         SECTION 2: ABOUT & SKILLS
+    =============================================== -->
+    <section id="about" aria-labelledby="about-heading" class="py-24 bg-brand-dark/50 border-y border-slate-800/50">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+          <!-- Cột Giới thiệu -->
+          <div class="space-y-6">
+            <!-- Thẻ <h2>: Phân cấp tiêu đề thứ 2, đại diện cho tiêu đề của Section -->
+            <h2 id="about-heading" class="text-3xl md:text-4xl font-bold text-white">
+              Sáng tạo mã nguồn & <br>
+              <span class="text-gradient">Trải nghiệm người dùng.</span>
+            </h2>
+            <p class="text-slate-400 leading-relaxed text-lg">
+              Với xuất phát điểm là một nhà thiết kế UI/UX, tôi mang tư duy thẩm mỹ vào từng dòng code Front-end. Tôi đặc biệt chú trọng đến kiến trúc Semantic HTML, Web Accessibility (WCAG) và hiệu năng ứng dụng (Core Web Vitals).
+            </p>
+            <p class="text-slate-400 leading-relaxed text-lg">
+              Triết lý làm việc của tôi: <em>"Giao diện đẹp phải đi đôi với khả năng sử dụng trọn vẹn cho tất cả mọi người, kể cả những người dùng công nghệ trợ năng."</em>
+            </p>
+          </div>
+
+          <!-- Cột Kỹ năng (Skill Badges) -->
+          <div>
+            <h3 class="text-xl font-semibold text-white mb-6">Công nghệ & Kỹ năng cốt lõi</h3>
+            
+            <!-- 
+              Sử dụng danh sách <ul> <li> để máy đọc (Screen Reader) đếm được số lượng kỹ năng.
+              Aria-label cung cấp ngữ cảnh chung cho toàn bộ danh sách.
+            -->
+            <ul aria-label="Danh sách các công cụ và ngôn ngữ lập trình" class="flex flex-wrap gap-3">
+              <li class="glass-card px-4 py-2.5 rounded-lg flex items-center gap-2 hover:border-cyan-500/50 transition-colors cursor-default">
+                <i class="fa-brands fa-html5 text-orange-500 text-xl" aria-hidden="true"></i>
+                <span class="text-slate-200 font-medium">Semantic HTML5</span>
+              </li>
+              <li class="glass-card px-4 py-2.5 rounded-lg flex items-center gap-2 hover:border-blue-500/50 transition-colors cursor-default">
+                <i class="fa-brands fa-css3-alt text-blue-500 text-xl" aria-hidden="true"></i>
+                <span class="text-slate-200 font-medium">CSS3 / Tailwind</span>
+              </li>
+              <li class="glass-card px-4 py-2.5 rounded-lg flex items-center gap-2 hover:border-yellow-400/50 transition-colors cursor-default">
+                <i class="fa-brands fa-js text-yellow-400 text-xl" aria-hidden="true"></i>
+                <span class="text-slate-200 font-medium">JavaScript (ES6+)</span>
+              </li>
+              <li class="glass-card px-4 py-2.5 rounded-lg flex items-center gap-2 hover:border-cyan-400/50 transition-colors cursor-default">
+                <i class="fa-brands fa-react text-cyan-400 text-xl" aria-hidden="true"></i>
+                <span class="text-slate-200 font-medium">React & Next.js</span>
+              </li>
+              <li class="glass-card px-4 py-2.5 rounded-lg flex items-center gap-2 hover:border-purple-500/50 transition-colors cursor-default">
+                <i class="fa-brands fa-figma text-purple-500 text-xl" aria-hidden="true"></i>
+                <span class="text-slate-200 font-medium">UI/UX & Figma</span>
+              </li>
+              <li class="glass-card px-4 py-2.5 rounded-lg flex items-center gap-2 hover:border-green-500/50 transition-colors cursor-default">
+                <i class="fa-solid fa-universal-access text-green-500 text-xl" aria-hidden="true"></i>
+                <span class="text-slate-200 font-medium">A11y (WCAG)</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==============================================
+         SECTION 3: PROJECTS
+    =============================================== -->
+    <section id="projects" aria-labelledby="projects-heading" class="py-24 relative">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        
+        <div class="text-center max-w-2xl mx-auto mb-16">
+          <h2 id="projects-heading" class="text-3xl md:text-4xl font-bold text-white mb-4">Dự án <span class="text-gradient">Tiêu biểu</span></h2>
+          <p class="text-slate-400 text-lg">Những sản phẩm được xây dựng từ sự tỉ mỉ, tập trung vào hiệu năng và tính thẩm mỹ cao nhất.</p>
+        </div>
+
+        <!-- Grid hiển thị dự án -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          
+          <!-- 
+            Thẻ <article>: Ngữ nghĩa chỉ ra đây là một khối nội dung trọn vẹn, có thể tự đứng độc lập.
+            Glassmorphism + Hover effect tạo chiều sâu 3D hiện đại.
+          -->
+          <article class="glass-card rounded-2xl overflow-hidden group hover:-translate-y-2 hover:shadow-2xl hover:shadow-cyan-500/20 transition-all duration-300 border border-slate-700/50">
+            <!-- 
+              Thẻ <figure>: Gói hình ảnh dự án. Loading="lazy" giúp tối ưu hóa hiệu năng tải trang.
+              Ảnh scale nhẹ khi hover tạo cảm giác mượt mà.
+            -->
+            <figure class="relative h-56 overflow-hidden">
+              <div class="absolute inset-0 bg-brand-dark/20 group-hover:bg-transparent transition-colors z-10"></div>
+              <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop" 
+                   alt="Giao diện bảng điều khiển phân tích dữ liệu DataViz" 
+                   loading="lazy" 
+                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            </figure>
+            
+            <div class="p-6 space-y-4">
+              <!-- Thẻ <h3>: Tiêu đề phụ của từng dự án riêng lẻ -->
+              <h3 class="text-2xl font-bold text-white group-hover:text-cyan-400 transition-colors">DataViz Dashboard</h3>
+              <p class="text-slate-400 text-sm leading-relaxed">Hệ thống quản trị và trực quan hóa dữ liệu thời gian thực. Giao diện Dark Mode với các biểu đồ tương tác cao.</p>
+              
+              <!-- Thẻ danh sách công nghệ -->
+              <ul class="flex gap-2 text-xs font-semibold text-cyan-300" aria-label="Công nghệ sử dụng">
+                <li class="bg-cyan-500/10 px-2 py-1 rounded">React</li>
+                <li class="bg-cyan-500/10 px-2 py-1 rounded">Tailwind</li>
+                <li class="bg-cyan-500/10 px-2 py-1 rounded">D3.js</li>
+              </ul>
+              
+              <div class="pt-4 flex items-center justify-between border-t border-slate-700/50">
+                <!-- Links: rel="noopener noreferrer" cho thẻ a target="_blank" -->
+                <a href="#" target="_blank" rel="noopener noreferrer" class="text-sm font-bold text-white hover:text-cyan-400 transition-colors" aria-label="Xem Demo của DataViz Dashboard (Mở tab mới)">
+                  Live Demo <i class="fa-solid fa-arrow-up-right-from-square ml-1" aria-hidden="true"></i>
+                </a>
+                <a href="#" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-white transition-colors" aria-label="Xem Source Code trên GitHub (Mở tab mới)">
+                  <i class="fa-brands fa-github text-xl" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Dự án 2 -->
+          <article class="glass-card rounded-2xl overflow-hidden group hover:-translate-y-2 hover:shadow-2xl hover:shadow-violet-500/20 transition-all duration-300 border border-slate-700/50">
+            <figure class="relative h-56 overflow-hidden">
+              <div class="absolute inset-0 bg-brand-dark/20 group-hover:bg-transparent transition-colors z-10"></div>
+              <img src="https://images.unsplash.com/photo-1600132806370-bf17e65e942f?q=80&w=800&auto=format&fit=crop" 
+                   alt="Giao diện ứng dụng E-Commerce mua sắm hiện đại" 
+                   loading="lazy" 
+                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            </figure>
+            <div class="p-6 space-y-4">
+              <h3 class="text-2xl font-bold text-white group-hover:text-violet-400 transition-colors">Aura Commerce</h3>
+              <p class="text-slate-400 text-sm leading-relaxed">Nền tảng thương mại điện tử Headless cực kỳ nhanh, hỗ trợ đầy đủ thanh toán đa cổng và tối ưu hóa SEO hoàn hảo.</p>
+              <ul class="flex gap-2 text-xs font-semibold text-violet-300" aria-label="Công nghệ sử dụng">
+                <li class="bg-violet-500/10 px-2 py-1 rounded">Next.js</li>
+                <li class="bg-violet-500/10 px-2 py-1 rounded">TypeScript</li>
+                <li class="bg-violet-500/10 px-2 py-1 rounded">Stripe</li>
+              </ul>
+              <div class="pt-4 flex items-center justify-between border-t border-slate-700/50">
+                <a href="#" target="_blank" rel="noopener noreferrer" class="text-sm font-bold text-white hover:text-violet-400 transition-colors" aria-label="Xem Demo của Aura Commerce (Mở tab mới)">
+                  Live Demo <i class="fa-solid fa-arrow-up-right-from-square ml-1" aria-hidden="true"></i>
+                </a>
+                <a href="#" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-white transition-colors" aria-label="Xem Source Code trên GitHub (Mở tab mới)">
+                  <i class="fa-brands fa-github text-xl" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Dự án 3 -->
+          <article class="glass-card rounded-2xl overflow-hidden group hover:-translate-y-2 hover:shadow-2xl hover:shadow-cyan-500/20 transition-all duration-300 border border-slate-700/50">
+            <figure class="relative h-56 overflow-hidden">
+              <div class="absolute inset-0 bg-brand-dark/20 group-hover:bg-transparent transition-colors z-10"></div>
+              <img src="https://images.unsplash.com/photo-1542744094-3a31f272c490?q=80&w=800&auto=format&fit=crop" 
+                   alt="Giao diện hệ thống quản lý Design System cho Doanh nghiệp" 
+                   loading="lazy" 
+                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            </figure>
+            <div class="p-6 space-y-4">
+              <h3 class="text-2xl font-bold text-white group-hover:text-cyan-400 transition-colors">Enterprise UI Kit</h3>
+              <p class="text-slate-400 text-sm leading-relaxed">Thư viện UI Components toàn diện. Tuân thủ 100% tiêu chuẩn Web Accessibility WCAG 2.1 AA.</p>
+              <ul class="flex gap-2 text-xs font-semibold text-cyan-300" aria-label="Công nghệ sử dụng">
+                <li class="bg-cyan-500/10 px-2 py-1 rounded">Vue 3</li>
+                <li class="bg-cyan-500/10 px-2 py-1 rounded">Storybook</li>
+                <li class="bg-cyan-500/10 px-2 py-1 rounded">A11y</li>
+              </ul>
+              <div class="pt-4 flex items-center justify-between border-t border-slate-700/50">
+                <a href="#" target="_blank" rel="noopener noreferrer" class="text-sm font-bold text-white hover:text-cyan-400 transition-colors" aria-label="Xem Demo của Enterprise UI Kit (Mở tab mới)">
+                  Live Demo <i class="fa-solid fa-arrow-up-right-from-square ml-1" aria-hidden="true"></i>
+                </a>
+                <a href="#" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-white transition-colors" aria-label="Xem Source Code trên GitHub (Mở tab mới)">
+                  <i class="fa-brands fa-github text-xl" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================
+         SECTION 4: CONTACT
+    =============================================== -->
+    <section id="contact" aria-labelledby="contact-heading" class="py-24 bg-brand-dark/50 border-t border-slate-800/50">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+          
+          <!-- Thông tin liên hệ -->
+          <div>
+            <h2 id="contact-heading" class="text-3xl md:text-4xl font-bold text-white mb-6">
+              Bắt đầu một <span class="text-gradient">Dự án mới?</span>
+            </h2>
+            <p class="text-slate-400 text-lg mb-10 leading-relaxed">
+              Dù bạn có một ý tưởng cần hiện thực hóa, hay chỉ đơn giản muốn trò chuyện về công nghệ và thiết kế, đừng ngần ngại liên hệ với tôi.
+            </p>
+            
+            <div class="space-y-6">
+              <!-- Địa chỉ email -->
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 rounded-full glass flex items-center justify-center text-cyan-400 flex-shrink-0">
+                  <i class="fa-solid fa-envelope text-xl" aria-hidden="true"></i>
+                </div>
+                <div>
+                  <h4 class="text-white font-semibold">Email</h4>
+                  <a href="mailto:hello@nguyenxvana.dev" class="text-slate-400 hover:text-cyan-400 transition-colors">hello@nguyenxvana.dev</a>
+                </div>
+              </div>
+              
+              <!-- Địa điểm -->
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 rounded-full glass flex items-center justify-center text-violet-400 flex-shrink-0">
+                  <i class="fa-solid fa-location-dot text-xl" aria-hidden="true"></i>
+                </div>
+                <div>
+                  <h4 class="text-white font-semibold">Địa điểm</h4>
+                  <p class="text-slate-400">TP. Hồ Chí Minh, Việt Nam</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 
+            Thẻ <form>: Biểu mẫu có tổ chức.
+            Focus state (viền ngoài sáng lên khi trỏ chuột/bàn phím) đóng vai trò then chốt trong Accessibility.
+          -->
+          <div class="glass-card p-8 rounded-2xl border border-slate-700/50">
+            <form action="#" method="POST" class="space-y-6">
+              
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Form Group: Tên -->
+                <div>
+                  <label for="name" class="block text-sm font-medium text-slate-300 mb-2">Họ và tên <span class="text-red-500" aria-hidden="true">*</span></label>
+                  <input type="text" id="name" name="name" required autocomplete="name"
+                    class="w-full bg-slate-900/50 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all"
+                    placeholder="VD: Trần Văn B">
+                </div>
+                
+                <!-- Form Group: Email -->
+                <div>
+                  <label for="email" class="block text-sm font-medium text-slate-300 mb-2">Email <span class="text-red-500" aria-hidden="true">*</span></label>
+                  <!-- type="email" kích hoạt bàn phím phù hợp trên thiết bị di động -->
+                  <input type="email" id="email" name="email" required autocomplete="email"
+                    class="w-full bg-slate-900/50 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all"
+                    placeholder="email@example.com">
+                </div>
+              </div>
+
+              <!-- Form Group: Lời nhắn -->
+              <div>
+                <label for="message" class="block text-sm font-medium text-slate-300 mb-2">Nội dung <span class="text-red-500" aria-hidden="true">*</span></label>
+                <textarea id="message" name="message" rows="4" required
+                  class="w-full bg-slate-900/50 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-all resize-y"
+                  placeholder="Tôi muốn thảo luận về..."></textarea>
+              </div>
+
+              <button type="submit" 
+                class="w-full py-4 rounded-lg bg-gradient-to-r from-cyan-500 to-violet-500 text-white font-bold text-lg hover:from-cyan-400 hover:to-violet-400 focus:outline-none focus:ring-4 focus:ring-cyan-500/50 transition-all shadow-lg shadow-cyan-500/25">
+                Gửi Tin Nhắn <i class="fa-solid fa-paper-plane ml-2" aria-hidden="true"></i>
+              </button>
+
+            </form>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 
+    Thẻ <footer>: Kết thúc tài liệu. Chứa bản quyền và các liên kết hệ thống bổ sung.
+    Vai trò semantic 'contentinfo' giúp trình đọc màn hình dễ dàng định vị khu vực cuối trang.
+  -->
+  <footer role="contentinfo" class="border-t border-slate-800 bg-slate-900">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 py-12 flex flex-col md:flex-row items-center justify-between gap-6">
+      
+      <div class="text-center md:text-left">
+        <a href="#hero" aria-label="Tải lại trang chủ" class="text-xl font-bold tracking-tighter text-white block mb-2">
+          <span class="text-gradient">Nova</span>Studio.
+        </a>
+        <p class="text-slate-500 text-sm">
+          &copy; 2026 Nguyễn Văn A. Trải nghiệm Web nâng cao.
+        </p>
+      </div>
+
+      <!-- Điều hướng Footer -->
+      <nav aria-label="Mạng xã hội" class="flex items-center gap-6">
+        <a href="#" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-cyan-400 text-2xl transition-colors" aria-label="Kết nối qua LinkedIn (Mở tab mới)">
+          <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
+        </a>
+        <a href="#" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-white text-2xl transition-colors" aria-label="Xem mã nguồn trên GitHub (Mở tab mới)">
+          <i class="fa-brands fa-github" aria-hidden="true"></i>
+        </a>
+        <a href="#" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-cyan-400 text-2xl transition-colors" aria-label="Kết nối qua Twitter (Mở tab mới)">
+          <i class="fa-brands fa-twitter" aria-hidden="true"></i>
+        </a>
+        <a href="#" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-pink-500 text-2xl transition-colors" aria-label="Xem thiết kế trên Dribbble (Mở tab mới)">
+          <i class="fa-brands fa-dribbble" aria-hidden="true"></i>
+        </a>
+      </nav>
+
+    </div>
+  </footer>
+
+</body>
+</html>
