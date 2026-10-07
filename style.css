@@ -1,0 +1,277 @@
+/* ===== CSS VARIABLES ===== */
+:root {
+  --color-primary: #047857;
+  --color-on-primary: #ffffff;
+  --color-text: #111827;
+  --color-muted: #4b5563;
+  --color-bg: #f3f6fb;
+  --color-surface: #ffffff;
+  --color-border: #d1d5db;
+  --space-sm: 12px; --space-md: 16px; --space-lg: 24px; --space-xl: 32px;
+  --radius-sm: 4px; --radius-md: 8px;
+  --font-code: Consolas, "Fira Code", "Courier New", monospace;
+  --fs-h1: 3rem; --fs-h2: 2rem; --fs-h3: 1.25rem; --fs-p: 1rem;
+}
+
+.dark-theme {
+  --color-primary: #00ff9c;
+  --color-on-primary: #05080a;
+  --color-text: #e6edf3;
+  --color-muted: #a7b4bf;
+  --color-bg: #14532d;
+  --color-surface: #11161d;
+  --color-border: #1f2a37;
+}
+
+@media (max-width: 599px) {
+  :root { --fs-h1: 2rem; --fs-h2: 1.5rem; --fs-h3: 1.125rem; --fs-p: 0.9375rem; }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0; overflow-x: hidden; font-family: var(--font-code); font-size: var(--fs-p); line-height: 1.6;
+  color: var(--color-text); background-color: var(--color-bg);
+  background-image: linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+  transition: background-color .4s ease, color .4s ease;
+}
+
+h1, h2, h3 { margin: 0 0 var(--space-sm); line-height: 1.2; }
+h1 { font-size: var(--fs-h1); } h2 { font-size: var(--fs-h2); } h3 { font-size: var(--fs-h3); }
+p { margin: 0 0 var(--space-md); color: var(--color-muted); }
+a { color: var(--color-primary); }
+.container { width: min(100% - var(--space-xl), 1000px); margin: 0 auto; }
+section[id] { padding: var(--space-xl) 0; scroll-margin-top: 64px; }
+.sec-title { color: var(--color-text); }
+.sec-title::before { content: "// "; color: var(--color-primary); }
+
+/* ===== BÀI 1: Floating Action Button (FAB) + Pulse Animation ===== */
+.fab {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 56px;
+  height: 56px;
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 24px;
+  z-index: 999;
+  box-shadow: 0 0 0 0 rgba(0, 255, 156, 0.7);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(0, 255, 156, 0.7); }
+  70% { box-shadow: 0 0 0 18px rgba(0, 255, 156, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(0, 255, 156, 0); }
+}
+
+/* ===== Nút bấm cơ bản ===== */
+.btn {
+  position: relative; display: inline-block; padding: 12px 28px; border: 0;
+  border-radius: var(--radius-md); font: bold 1rem var(--font-code); text-decoration: none;
+  color: var(--color-on-primary); background-color: var(--color-primary); cursor: pointer;
+  box-shadow: 0 3px 6px rgba(0,0,0,.35);
+  transition: transform .25s cubic-bezier(.25,.8,.25,1); will-change: transform;
+}
+.btn::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  box-shadow: 0 14px 24px rgba(0,0,0,.55); opacity: 0; transition: opacity .25s cubic-bezier(.25,.8,.25,1);
+}
+.btn:hover { transform: translateY(-3px); }
+.btn:hover::after { opacity: 1; }
+.btn:active { transform: translateY(0) scale(.88); transition-duration: .1s; }
+.btn-outline { background: transparent; color: var(--color-primary); border: 2px solid var(--color-primary); box-shadow: none; }
+
+/* ===== Loading Spinner ===== */
+.loader {
+  position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center;
+  background-color: var(--color-bg); animation: loader-hide .4s ease 1.5s forwards;
+}
+@keyframes loader-hide { to { opacity: 0; visibility: hidden; pointer-events: none; } }
+.spinner {
+  width: 56px; height: 56px; border: 5px solid var(--color-border);
+  border-top-color: var(--color-primary); border-radius: 50%;
+  animation: spin 1s linear infinite; will-change: transform;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ===== Navbar + BÀI 5: Modern Hamburger Menu (Biến thành dấu X) ===== */
+.navbar { position: sticky; top: 0; z-index: 50; background: var(--color-surface); border-bottom: 1px solid var(--color-border); }
+.nav-inner { display: flex; align-items: center; justify-content: space-between; padding: var(--space-sm) 0; }
+.logo { font-weight: bold; color: var(--color-primary); text-decoration: none; }
+.menu { display: flex; gap: var(--space-lg); list-style: none; margin: 0; padding: 0; }
+.menu a { color: var(--color-text); text-decoration: none; }
+.menu a:hover { color: var(--color-primary); }
+.nav-right { display: flex; gap: 8px; align-items: center; }
+.icon-btn {
+  background: transparent; color: var(--color-text); border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm); padding: 6px 12px; font: inherit; cursor: pointer;
+}
+
+.menu-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+.menu-btn .bar {
+  width: 100%;
+  height: 3px;
+  background-color: var(--color-text);
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform-origin: left center;
+}
+.menu-btn.active .bar:nth-child(1) { transform: rotate(45deg); }
+.menu-btn.active .bar:nth-child(2) { opacity: 0; }
+.menu-btn.active .bar:nth-child(3) { transform: rotate(-45deg); }
+
+@media (max-width: 767px) {
+  .menu { display: none; }
+  .menu-btn { display: flex; }
+  .menu.open {
+    display: flex; flex-direction: column; gap: var(--space-sm);
+    position: absolute; top: 100%; left: 0; right: 0; padding: var(--space-md);
+    background: var(--color-surface); border-bottom: 1px solid var(--color-border);
+  }
+}
+
+/* ===== Hero + BÀI 3: Typing Effect ===== */
+.hero { padding: 72px 0 40px; }
+.prompt { color: var(--color-primary); margin-bottom: var(--space-sm); }
+.hero h1 { color: var(--color-text); }
+
+.typing-container { display: inline-block; }
+.typing-text {
+  display: inline-block;
+  font-size: 1.25rem;
+  color: var(--color-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 3px solid var(--color-primary);
+  width: 27ch;
+  animation: typing 3.5s steps(27, end) infinite, blink-caret 0.6s step-end infinite;
+}
+@keyframes typing {
+  0%, 10% { width: 0; }
+  70%, 90% { width: 27ch; }
+  100% { width: 0; }
+}
+@keyframes blink-caret { 50% { border-color: transparent; } }
+
+.hero-cta { display: flex; flex-wrap: wrap; gap: var(--space-md); margin-top: var(--space-lg); }
+
+/* ===== Giới thiệu + BÀI 2: Card Flip Effect ===== */
+.about-grid { display: grid; grid-template-columns: 280px 1fr; gap: var(--space-lg); align-items: center; }
+@media (max-width: 767px) { .about-grid { grid-template-columns: 1fr; } }
+
+.flip-card {
+  width: 100%;
+  height: 320px;
+  perspective: 1000px;
+}
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s cubic-bezier(0.4, 0.2, 0.2, 1);
+  transform-style: preserve-3d;
+}
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: var(--radius-md);
+  border: 2px solid var(--color-primary);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-surface);
+  text-align: center;
+}
+.flip-card-front img {
+  width: 140px; height: 140px; object-fit: contain; border-radius: 50%;
+  border: 2px solid var(--color-primary); margin-bottom: 12px;
+}
+.flip-card-back {
+  transform: rotateY(180deg);
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+/* ===== BÀI 4: Parallax Image Banner ===== */
+.parallax-banner {
+  background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1200&q=80');
+  min-height: 250px;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: var(--space-xl) 0;
+  border-radius: var(--radius-md);
+  text-align: center;
+  color: #ffffff;
+}
+
+/* ===== Kỹ năng + BÀI 6: Skill Bar Animation ===== */
+.services-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+@media (max-width: 767px) { .services-container { grid-template-columns: 1fr; } }
+.card {
+  background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: var(--radius-md); padding: var(--space-lg);
+}
+
+.skill-item { margin-bottom: 16px; }
+.skill-info { display: flex; justify-content: space-between; margin-bottom: 6px; font-weight: bold; }
+.skill-bar {
+  width: 100%; height: 10px; background-color: var(--color-border);
+  border-radius: 5px; overflow: hidden;
+}
+.skill-progress {
+  height: 100%;
+  background-color: var(--color-primary);
+  width: 0;
+  border-radius: 5px;
+  animation: fillSkillBar 1.8s ease-out forwards;
+}
+@keyframes fillSkillBar {
+  to { width: var(--target); }
+}
+
+/* ===== Dự án & Timeline ===== */
+.project-list { display: grid; gap: var(--space-lg); }
+.project-card { display: flex; gap: var(--space-lg); align-items: center; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--space-lg); }
+.thumb { flex: 0 0 200px; height: 120px; display: grid; place-items: center; border-radius: var(--radius-md); font-size: 2rem; font-weight: bold; color: var(--color-on-primary); background: linear-gradient(135deg, var(--color-primary), #0ea5e9); }
+.tags { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0 0 var(--space-md); padding: 0; }
+.tags li { border: 1px solid var(--color-primary); color: var(--color-primary); border-radius: var(--radius-sm); padding: 2px 10px; font-size: .85rem; }
+@media (max-width: 767px) { .project-card { flex-direction: column; align-items: stretch; } .thumb { width: 100%; } }
+
+.timeline { list-style: none; margin: 0; padding: 0 0 0 var(--space-lg); border-left: 2px solid var(--color-primary); }
+.timeline li { position: relative; margin-bottom: var(--space-lg); }
+.timeline li::before { content: ""; position: absolute; left: calc(-1 * var(--space-lg) - 7px); top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--color-primary); }
+
+.contact-box { background: var(--color-surface); border-left: 4px solid var(--color-primary); border-radius: var(--radius-sm); padding: var(--space-lg); }
+.site-footer { padding: var(--space-lg) 0; background: var(--color-surface); border-top: 1px solid var(--color-border); color: var(--color-muted); text-align: center; }
+
+.rv { opacity: 0; transform: var(--from, translateY(40px)); transition: opacity .8s ease-out, transform .8s ease-out; }
+.rv.in { opacity: 1; transform: none; }
